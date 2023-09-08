@@ -9,3 +9,8 @@ dist
 
 # Local Netlify folder
 .netlify
+
+# Misc
+.DS_Store
+.fleet
+.idea
