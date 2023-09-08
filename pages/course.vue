@@ -22,17 +22,17 @@
           :key="chapter.slug"
         >
           <h4>{{ chapter.title }}</h4>
-          <a
+          <NuxtLink
             v-for="(lesson, index) in chapter.lessons"
             :key="lesson.slug"
             class="flex flex-row space-x-1 no-underline prose-sm font-normal py-1 px-4 -mx-4"
-            :href="`/course/chapter/${chapter.slug}/lesson/${lesson.slug}`"
+            :to="`/course/chapter/${chapter.slug}/lesson/${lesson.slug}`"
           >
             <span class="text-gray-500"
               >{{ index + 1 }}.</span
             >
             <span>{{ lesson.title }}</span>
-    </a>
+          </NuxtLink>
         </div>
       </div>
 
