@@ -22,10 +22,9 @@ type Course = {
   chapters: Chapter[];
 };
 
-export const useCourse = () => {
-  return {
-    ...courseData,
-    chapters: courseData.chapters.map((chapter) => {
+export const useCourse = (): Course => {
+  const chapters: Chapter[] = courseData.chapters.map(
+    (chapter) => {
       const lessons: Lesson[] = chapter.lessons.map(
         (lesson) => ({
           ...lesson,
@@ -36,6 +35,10 @@ export const useCourse = () => {
         ...chapter,
         lessons,
       };
-    }),
+    }
+  );
+  return {
+    ...courseData,
+    chapters,
   };
 };
