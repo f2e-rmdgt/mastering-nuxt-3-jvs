@@ -48,11 +48,10 @@ definePageMeta({
     );
 
     if (!chapter) {
-      throw createError({
+      return createError({
         statusCode: 404,
         message: 'Chapter not found',
       });
-      return false;
     }
 
     const lesson = chapter.lessons.find(
@@ -60,11 +59,10 @@ definePageMeta({
     );
 
     if (!lesson) {
-      throw createError({
+      return createError({
         statusCode: 404,
         message: 'Lesson not found',
       });
-      return false;
     }
 
     return true;
