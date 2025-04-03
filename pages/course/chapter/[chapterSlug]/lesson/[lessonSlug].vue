@@ -38,6 +38,43 @@
 const course = useCourse();
 const route = useRoute();
 
+definePageMeta({
+  // if we use `validate` (syntactic sugar for a route middleware) here,
+  // we cannot implement other middleware
+  middleware: [
+    function({ params }, from) {
+      // We should use `useCourse` again here because
+      // we are doing things in the `definePageMeta` compiler macro function
+      const course = useCourse();
+      const chapter = course.chapters.find(
+        (chapter) => chapter.slug === params.chapterSlug
+      );
+
+      if (!chapter) {
+        return abortNavigation(
+          createError({
+            statusCode: 404,
+            message: 'Chapter not found',
+          })
+        );
+      }
+
+      const lesson = chapter.lessons.find(
+        (lesson) => lesson.slug === params.lessonSlug
+      );
+
+      if (!lesson) {
+        return abortNavigation(
+          createError({
+            statusCode: 404,
+            message: 'Lesson not found',
+          })
+        );
+      }
+    },
+  ],
+});
+
 const chapter = computed(() => {
   return course.chapters.find(
     (chapter) => chapter.slug === route.params.chapterSlug
