@@ -41,6 +41,10 @@
 
     <div class="prose p-12 bg-white rounded-md w-[65ch]">
       <NuxtErrorBoundary>
+        <!--
+          NuxtErrorBoundary is usually used to catch errors in the child components.
+          In the other words, it is usually used to catch errors at where the route changes.
+        -->
         <NuxtPage v-if="route.path !== '/course'" />
         <template #error="{ error }">
           <p>
