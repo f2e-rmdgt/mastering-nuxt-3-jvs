@@ -78,6 +78,12 @@ if (
 }
 
 const resetError = async (error) => {
+// if the following execution order is reversed,
+// Setting `error.value = null` tells the NuxtErrorBoundary to try rendering its child component again immediately
+// Since you haven't navigated away yet, the exact same component with the same state/props would be rendered
+// The same error would occur again instantly
+// Only then would the navigation attempt happen, but it's too late - the error has already re-triggered
+  
   await navigateTo(
     '/course/chapter/1-chapter-1/lesson/1-introduction-to-typescript-with-vue-js-3'
   );
