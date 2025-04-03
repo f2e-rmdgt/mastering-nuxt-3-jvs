@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="prose mb-12">
     <h1>
       <span class="font-medium">
@@ -58,6 +59,7 @@
         </template>
       </NuxtErrorBoundary>
     </div>
+  </div>
   </div>
 </template>
 
