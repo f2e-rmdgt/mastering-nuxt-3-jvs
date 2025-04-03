@@ -64,6 +64,25 @@
 <script setup>
 const { chapters } = useCourse();
 
+definePageMeta({
+  middleware: [
+    // Redirect to the first chapter/lesson if the path is just '/course'
+    function({ path }) {
+
+      if (path === '/course') {
+        const { chapters } = useCourse();
+        const firstChapter = chapters[0];
+        const firstLesson = firstChapter.lessons[0];
+
+        return navigateTo(
+          `/course/chapter/${firstChapter.slug}/lesson/${firstLesson.slug}`
+        );
+
+      }
+    },
+  ],
+});
+
 const resetError = async (error) => {
 // if the following execution order is reversed,
 // Setting `error.value = null` tells the NuxtErrorBoundary to try rendering its child component again immediately
