@@ -41,7 +41,7 @@
 
     <div class="prose p-12 bg-white rounded-md w-[65ch]">
       <NuxtErrorBoundary>
-        <NuxtPage />
+        <NuxtPage v-if="route.path !== '/course'" />
         <template #error="{ error }">
           <p>
             Oh no, something went wrong with the lesson!
@@ -62,7 +62,20 @@
 </template>
 
 <script setup>
+const route = useRoute();
 const { chapters } = useCourse();
+
+// Redirect to the first chapter/lesson
+if (
+  route.path === '/course' &&
+  chapters.length > 0 &&
+  chapters[0].lessons.length > 0
+) {
+  console.log('Redirecting to first chapter/lesson');
+  const firstChapter = chapters[0];
+  const firstLesson = firstChapter.lessons[0];
+  navigateTo(`/course/chapter/${firstChapter.slug}/lesson/${firstLesson.slug}`);
+}
 
 const resetError = async (error) => {
   await navigateTo(
