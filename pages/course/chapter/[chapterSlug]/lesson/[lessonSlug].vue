@@ -42,6 +42,11 @@ definePageMeta({
   // if we use `validate` (syntactic sugar for a route middleware) here,
   // we cannot implement other middleware
   middleware: [
+    // [Inline middleware]:
+    // - good for some one-off logic
+    // - Don't need this logic anywhere else
+
+    // The following functions' order is important
     function({ params }, from) {
       // We should use `useCourse` again here because
       // we are doing things in the `definePageMeta` compiler macro function
@@ -72,6 +77,8 @@ definePageMeta({
         );
       }
     },
+    // [named middleware]
+    'auth',
   ],
 });
 
